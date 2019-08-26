@@ -440,7 +440,7 @@ def _migrate(conn, to):
     assert current <= to
 
     globs = globals()
-    for v in xrange(current+1, to+1):
+    for v in range(current+1, to+1):
         fname = '_migrate_%d' % v
         with Tx(conn) as c:
             assert fname in globs, 'Migration function %d not defined.' % v
