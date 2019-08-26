@@ -1,5 +1,5 @@
 from __future__ import absolute_import, division, print_function
-import ConfigParser
+import configparser
 import datetime
 import os
 import os.path as path
@@ -68,7 +68,7 @@ def config(config_path=''):
         path.join(_config_home, 'nfldb', 'config.ini'),
     ]
     tried = []
-    cp = ConfigParser.RawConfigParser()
+    cp = configparser.RawConfigParser()
     for p in paths:
         tried.append(p)
         try:

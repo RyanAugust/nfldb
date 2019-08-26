@@ -210,7 +210,7 @@ def guess_position(pps):
     counts = defaultdict(int)
     for pp in pps:
         counts[pp.guess_position] += 1
-    return max(counts.items(), key=lambda (_, count): count)[0]
+    return max(counts.items(), key=lambda _, count: count)[0]
 
 
 def _append_conds(conds, entity, kwargs):
