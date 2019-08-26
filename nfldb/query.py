@@ -961,7 +961,7 @@ class Query (Condition):
                     continue
                 joins += types.PlayPlayer._sql_join_to_all(ent)
 
-            sum_fields = types._player_categories.keys() \
+            sum_fields = list(types._player_categories.keys()) \
                 + AggPP._sql_tables['derived']
             select_sum_fields = AggPP._sql_select_fields(sum_fields)
             where = self._sql_where(cur)
