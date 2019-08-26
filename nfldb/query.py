@@ -169,11 +169,11 @@ def player_search(db, full_name, team=None, position=None,
     results = []
     with Tx(db) as cursor:
         if team is not None:
-            qteam = cursor.mogrify('team = %s', (team,))
+            qteam = cursor.mogrify('team = %s', (team,)).decode('utf-8')
         if position is not None:
-            qposition = cursor.mogrify('position = %s', (position,))
+            qposition = cursor.mogrify('position = %s', (position,)).decode('utf-8')
 
-        fuzzy_filled = cursor.mogrify(fuzzy, (full_name,))
+        fuzzy_filled = cursor.mogrify(fuzzy, (full_name,)).decode('utf-8')
         columns = types.Player._sql_select_fields(types.Player.sql_fields())
         columns.append('%s AS distance' % fuzzy_filled)
         q = q.format(
@@ -289,7 +289,7 @@ class Condition (object):
             return c._sql_where(cursor, aliases=aliases, aggregate=aggregate)
         ds = []
         for conjuncts in disjuncts:
-            ds.append(' AND '.join('(%s)' % sql(c) for c in conjuncts))
+            ds.append(' AND '.join("(%s)" % sql(c) for c in conjuncts))
         return ' OR '.join('(%s)' % d for d in ds if d)
 
 
@@ -339,8 +339,8 @@ class Comparison (Condition):
         return set([self.entity])
 
     def __str__(self):
-        return '%s %s %s' \
-               % (self.entity._sql_field(self.column),
+        return "%s %s %s" % \
+        (self.entity._sql_field(self.column),
                   self.operator, self.value)
 
     def _sql_where(self, cursor, aliases=None, aggregate=False):
@@ -350,11 +350,11 @@ class Comparison (Condition):
         if isinstance(self.value, tuple) or isinstance(self.value, list):
             assert self.operator == '=', \
                 'Disjunctions must use "=" for column "%s"' % field
-            vals = [cursor.mogrify('%s', (v,)) for v in self.value]
+            vals = [cursor.mogrify('%s', (v,)).decode('utf-8') for v in self.value]
             return '%s IN (%s)' % (field, ', '.join(vals))
         else:
             paramed = '%s %s %s' % (field, self.operator, '%s')
-            return cursor.mogrify(paramed, (self.value,))
+            return cursor.mogrify(paramed, (self.value,)).decode('utf-8')
 
 
 def QueryOR(db):
@@ -773,12 +773,12 @@ class Query (Condition):
                 fields += entity._sql_primary_key(table)
             args['groupby'] = 'GROUP BY ' + ', '.join(fields)
 
-        q = '''
-            SELECT {columns} {from} {joins}
-            WHERE {where}
-            {groupby}
-            {sortby}
-        '''.format(**args)
+        q = """
+        SELECT {columns} {from} {joins}
+        WHERE {where}
+        {groupby}
+        {sortby}
+        """.format(**args)
         return q
 
     def as_games(self):
