@@ -154,7 +154,7 @@ def update_players(cursor, interval):
     ''')
 
     log('Updating %d players... ' % len(nflgame.players), end='')
-    for p in nflgame.players.itervalues():
+    for p in nflgame.players.values():
         dbp = nfldb.Player._from_nflgame_player(db, p)
         for table, prim, vals in dbp._rows:
             nfldb.db._upsert(cursor, table, vals, prim)
