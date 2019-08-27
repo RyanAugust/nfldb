@@ -1,5 +1,7 @@
 **Maintained version of NFLDB**
-This fork is intended upgrade the original package to full Python 3.x compatability
+
+This fork is intended upgrade the original package to full Python 3.x compatability.
+
 Originally Authored by [Andrew Gallant](https://github.com/BurntSushi/nflgame)
 
 
