@@ -1,4 +1,7 @@
-**THIS PROJECT IS UNMAINTAINED.**
+**Maintained version of NFLDB**
+This fork is intended upgrade the original package to full Python 3.x compatability
+Originally Authored by [Andrew Gallant](https://github.com/BurntSushi/nflgame)
+
 
 nfldb is a relational database bundled with a Python module to quickly and
 conveniently query and update the database with data from active games.
@@ -49,7 +52,7 @@ on the [nfldb wiki](https://github.com/BurntSushi/nfldb/wiki).
 
 If you need any help or have found a bug, please
 [open a new issue on nfldb's issue
-tracker](https://github.com/BurntSushi/nfldb/issues/new)
+tracker](https://github.com/RyanAugust/nfldb/issues/new)
 or join us at our IRC channel `#nflgame` on FreeNode.
 
 
@@ -63,10 +66,9 @@ nfldb depends on the following Python packages available in
 [enum34](https://pypi.python.org/pypi/enum34).
 nfldb also needs PostgreSQL installed with an available empty database.
 
-I've only tested nfldb with Python 2.7 on a Linux system. In theory, nfldb
-should be able to work on Windows and Mac systems as long as you can get
-PostgreSQL running. It is not Python 3 compatible (yet, mostly because of
-the `nflgame` dependency).
+I've only tested nfldb with Python 3.6 on a Mac system. In theory, nfldb
+should be able to work on Windows and Linux systems as long as you can get
+PostgreSQL running.
 
 Please see the
 [installation guide](https://github.com/BurntSushi/nfldb/wiki/Installation)
